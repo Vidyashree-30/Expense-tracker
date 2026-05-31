@@ -1,0 +1,53 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+  padding: 20px;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 650px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 40px;
+  color: white;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.theme-card {
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  text-align: center;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.theme-card:hover {
+  transform: scale(1.05);
+}
+
+.theme-card.active {
+  border: 2px solid white;
+}
+
+.signin-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.signin-link a {
+  color: #10b981;
+  text-decoration: none;
+  font-weight: bold;
+}
