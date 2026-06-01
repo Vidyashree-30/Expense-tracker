@@ -1,13 +1,25 @@
 import { Link } from "react-router-dom";
-import { FaGoogle, FaEye } from "react-icons/fa";
+
+import {
+  FaWallet,
+  FaGoogle,
+  FaEye
+} from "react-icons/fa";
+
 import "../styles/Login.css";
 
 function Login() {
   return (
     <div className="login-container">
+
       <div className="login-card">
 
-        <h1 className="app-title">Expense Tracker</h1>
+        <div className="logo-box">
+         <FaWallet className="wallet-icon" />
+        </div>
+        <h1 className="app-title">
+          Expense<br/>Tracker
+        </h1>
 
         <p className="app-subtitle">
           Smart • Secure • Personalized
@@ -17,9 +29,14 @@ function Login() {
           Welcome Back 👋
         </h2>
 
+        <p className="welcome-subtitle">
+          Login to continue your journey
+        </p>
+
         <form>
 
           <label>Email Address</label>
+
           <input
             type="email"
             className="form-control mb-3"
@@ -29,12 +46,15 @@ function Login() {
           <label>Password</label>
 
           <div className="password-box">
+
             <input
               type="password"
               className="form-control"
               placeholder="Enter your password"
             />
+
             <FaEye className="eye-icon" />
+
           </div>
 
           <div className="options-row">
@@ -50,9 +70,9 @@ function Login() {
 
           <button
             type="submit"
-            className="btn btn-success login-btn"
+            className="login-btn"
           >
-            Sign In
+            Log In
           </button>
 
           <div className="divider">
@@ -61,7 +81,7 @@ function Login() {
 
           <button
             type="button"
-            className="btn btn-light google-btn"
+            className="google-btn"
           >
             <FaGoogle />
             <span> Continue with Google</span>
@@ -75,6 +95,7 @@ function Login() {
         </form>
 
       </div>
+
     </div>
   );
 }
