@@ -5,16 +5,22 @@ import "../styles/Register.css";
 function Register() {
   return (
     <div className="register-container">
-
       <div className="register-card">
 
-        <div className="logo-box">
-          <FaWallet className="wallet-icon" />
-        </div>
+        <div className="logo-section">
+          <div className="logo-icon">
+            <FaWallet />
+          </div>
 
-        <h1 className="app-title">
-          Expense Tracker
-        </h1>
+          <h1>
+            Expense <br />
+            Tracker
+          </h1>
+
+          <p className="app-tagline">
+            Smart • Secure • Personalized
+          </p>
+        </div>
 
         <h2 className="register-title">
           Create Account
@@ -59,7 +65,6 @@ function Register() {
         </p>
 
       </div>
-
     </div>
   );
 }

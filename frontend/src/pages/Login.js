@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {
   FaWallet,
   FaGoogle,
@@ -15,10 +14,11 @@ function Login() {
       <div className="login-card">
 
         <div className="logo-box">
-         <FaWallet className="wallet-icon" />
+          <FaWallet className="wallet-icon" />
         </div>
+
         <h1 className="app-title">
-          Expense<br/>Tracker
+          Expense<br />Tracker
         </h1>
 
         <p className="app-subtitle">
@@ -30,7 +30,7 @@ function Login() {
         </h2>
 
         <p className="welcome-subtitle">
-          Login to continue your journey
+          Track Today. Save Tomorrow.
         </p>
 
         <form>
