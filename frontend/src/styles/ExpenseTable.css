@@ -1,0 +1,47 @@
+.expense-table {
+  margin-top: 30px;
+
+  background: #0f172a;
+
+  border: 1px solid #1e293b;
+
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 20px 25px;
+
+  border-bottom: 1px solid #1e293b;
+}
+
+.table-header h3 {
+  color: white;
+  margin: 0;
+}
+
+.expense-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.expense-table th {
+  text-align: left;
+
+  padding: 18px;
+
+  color: #94a3b8;
+
+  font-weight: 500;
+}
+
+.expense-table td {
+  padding: 18px;
+
+  color: white;
+}
+
+.expense-table tr {
+  border-top: 1px solid #1e293b;
+}

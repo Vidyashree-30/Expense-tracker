@@ -1,0 +1,12 @@
+.chart-card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 20px;
+  padding: 25px;
+  margin-top: 30px;
+}
+
+.chart-card h3 {
+  color: white;
+  margin-bottom: 20px;
+}
