@@ -1,0 +1,62 @@
+.bunny-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+  background: linear-gradient(180deg, #1e293b 0%, #172033 100%);
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.bunny-card h3 {
+  margin: 0 0 20px;
+  color: #ffffff;
+  font-size: 22px;
+}
+
+.bunny-face {
+  font-size: 30px;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.bunny-message {
+  margin-top: 20px;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.bunny-card p {
+  margin: 8px 0;
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+.bunny-card h2 {
+  margin: 10px 0;
+  color: #ffffff;
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.bunny-btn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  transition: transform 0.2s ease;
+}
+
+.bunny-btn:hover {
+  transform: translateY(-2px);
+}
