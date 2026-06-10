@@ -1,12 +1,19 @@
 import { useState } from "react";
+import {
+  Wallet,
+  IndianRupee,
+  TrendingUp,
+  CalendarDays,
+} from "lucide-react";
 
-import ExpenseChart from "../components/ExpenseChart";
-import AddExpenseButton from "../components/AddExpenseButton";
-import AddExpenseModal from "../components/AddExpenseModal";
-import ExpenseTable from "../components/ExpenseTable";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import StatCard from "../components/StatCard";
+import ExpenseChart from "../components/ExpenseChart";
+import BunnyAssistant from "../components/BunnyAssistant";
+import ExpenseTable from "../components/ExpenseTable";
+import AddExpenseButton from "../components/AddExpenseButton";
+import AddExpenseModal from "../components/AddExpenseModal";
 
 import "../styles/Dashboard.css";
 
@@ -46,32 +53,46 @@ function Dashboard() {
           <StatCard
             title="Total Expenses"
             value="₹15,000"
-            subtitle="All time expenses"
+            subtitle="Overall Spending"
+            icon={<Wallet size={22} />}
+            trend="+12%"
           />
 
           <StatCard
-            title="This Month"
-            value="₹5,000"
-            subtitle="June 2026"
+            title="Monthly Budget"
+            value="₹30,000"
+            subtitle="Current Budget"
+            icon={<IndianRupee size={22} />}
+            trend="Active"
           />
 
           <StatCard
             title="Remaining Budget"
-            value="₹25,000"
-            subtitle="Available to spend"
+            value="₹15,000"
+            subtitle="Available"
+            icon={<TrendingUp size={22} />}
+            trend="50%"
+          />
+
+          <StatCard
+            title="Today's Spending"
+            value="₹450"
+            subtitle="Today"
+            icon={<CalendarDays size={22} />}
+            trend="+₹50"
           />
         </div>
 
-        <ExpenseChart />
+        <div className="analytics-grid">
+          <ExpenseChart />
+
+          <BunnyAssistant />
+        </div>
 
         <ExpenseTable expenses={expenses} />
 
         <AddExpenseButton
-          onClick={() => {
-            alert("Button clicked");
-            console.log("Button clicked");
-            setShowModal(true);
-          }}
+          onClick={() => setShowModal(true)}
         />
 
         {showModal && (

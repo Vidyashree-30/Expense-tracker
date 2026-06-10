@@ -1,24 +1,20 @@
 .expense-table {
   margin-top: 30px;
-
-  background: #0f172a;
-
-  border: 1px solid #1e293b;
-
+  background: #111c32;
+  border: 1px solid #22314d;
   border-radius: 20px;
-
   overflow: hidden;
 }
 
 .table-header {
-  padding: 20px 25px;
-
-  border-bottom: 1px solid #1e293b;
+  padding: 22px 25px;
+  border-bottom: 1px solid #22314d;
 }
 
 .table-header h3 {
-  color: white;
   margin: 0;
+  color: white;
+  font-size: 20px;
 }
 
 .expense-table table {
@@ -26,22 +22,75 @@
   border-collapse: collapse;
 }
 
+.expense-table thead {
+  background: rgba(255, 255, 255, 0.02);
+}
+
 .expense-table th {
-  text-align: left;
-
   padding: 18px;
-
+  text-align: left;
   color: #94a3b8;
-
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .expense-table td {
   padding: 18px;
-
   color: white;
+  border-top: 1px solid #1f2c45;
 }
 
-.expense-table tr {
-  border-top: 1px solid #1e293b;
+.expense-table tbody tr {
+  transition: 0.25s;
+}
+
+.expense-table tbody tr:hover {
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.category-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #7c3aed, #ec4899);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.amount-cell {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s;
+}
+
+.edit-btn {
+  background: #2563eb;
+}
+
+.edit-btn:hover {
+  transform: scale(1.08);
+}
+
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  transform: scale(1.08);
 }
