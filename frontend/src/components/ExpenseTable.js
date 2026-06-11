@@ -4,6 +4,7 @@ import "../styles/ExpenseTable.css";
 function ExpenseTable({
   expenses,
   onDelete,
+  onEdit,
 }) {
   return (
     <div className="expense-table">
@@ -55,6 +56,7 @@ function ExpenseTable({
                     <button
                       className="edit-btn"
                       title="Edit"
+                      onClick={() => onEdit(index)}
                     >
                       <Pencil size={16} />
                     </button>

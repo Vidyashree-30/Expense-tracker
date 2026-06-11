@@ -1,144 +1,71 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 35px;
-}
-
-.header-left h1 {
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: 34px;
-  font-weight: 700;
-}
-
-.header-left p {
-  margin-top: 8px;
-
-  color: #94a3b8;
-
-  font-size: 15px;
-}
-
 .header-right {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
 }
 
-.search-box {
+.header-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  background: #1e293b;
-
-  padding: 12px 16px;
-
-  border-radius: 14px;
-
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.search-box svg {
-  color: #94a3b8;
-}
-
-.search-box input {
-  background: transparent;
-  border: none;
-  outline: none;
-
-  color: white;
-
-  width: 220px;
+  gap: 12px;
 }
 
 .notification-btn {
-  width: 48px;
-  height: 48px;
-
-  border: none;
-
-  border-radius: 14px;
-
-  background: #1e293b;
-
-  color: white;
-
-  cursor: pointer;
-
   position: relative;
-
-  transition: 0.25s;
-}
-
-.notification-btn:hover {
-  background: #293548;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  background-color: #1e293b;
 }
 
 .notification-dot {
-  width: 9px;
-  height: 9px;
-
-  border-radius: 50%;
-
-  background: #ef4444;
-
   position: absolute;
-
-  right: 13px;
-  top: 12px;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background-color: #7c3aed;
+  border-radius: 50%;
 }
 
 .profile-chip {
   display: flex;
   align-items: center;
-  gap: 12px;
-
-  background: #1e293b;
-
-  padding: 8px 14px;
-
-  border-radius: 14px;
+  gap: 10px;
+  background-color: #1e293b;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
 }
 
 .profile-avatar {
-  width: 44px;
-  height: 44px;
-
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: linear-gradient(
-    135deg,
-    #7c3aed,
-    #ec4899
-  );
-
-  color: white;
-
   font-weight: bold;
-}
-
-.profile-chip h4 {
-  margin: 0;
-
   color: white;
-
-  font-size: 15px;
+  font-size: 14px;
 }
 
-.profile-chip p {
-  margin-top: 4px;
+.profile-info h4 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+}
 
-  color: #94a3b8;
-
-  font-size: 12px;
+.profile-info p {
+  font-size: 11px;
+  color: #7c3aed;
+  margin: 0;
 }

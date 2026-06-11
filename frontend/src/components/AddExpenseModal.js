@@ -1,23 +1,44 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/AddExpenseModal.css";
 
-function AddExpenseModal({ onClose, onAddExpense }) {
+function AddExpenseModal({
+  onClose,
+  onAddExpense,
+  editingExpense,
+  onUpdateExpense,
+}) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Food");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
   const [notes, setNotes] = useState("");
 
+  useEffect(() => {
+    if (editingExpense) {
+      setTitle(editingExpense.title || "");
+      setCategory(editingExpense.category || "Food");
+      setAmount(editingExpense.amount || "");
+      setDate(editingExpense.date || "");
+      setNotes(editingExpense.notes || "");
+    }
+  }, [editingExpense]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onAddExpense({
+    const expenseData = {
       title,
       category,
       amount: Number(amount),
       date,
       notes,
-    });
+    };
+
+    if (editingExpense) {
+      onUpdateExpense(expenseData);
+    } else {
+      onAddExpense(expenseData);
+    }
 
     onClose();
   };
@@ -25,7 +46,11 @@ function AddExpenseModal({ onClose, onAddExpense }) {
   return (
     <div className="modal-overlay">
       <div className="expense-modal">
-        <h2>💜 Add New Expense</h2>
+        <h2>
+          {editingExpense
+            ? "✏️ Edit Expense"
+            : "💜 Add New Expense"}
+        </h2>
 
         <form onSubmit={handleSubmit}>
           <label>Expense Title</label>
@@ -57,7 +82,6 @@ function AddExpenseModal({ onClose, onAddExpense }) {
 
           <input
             type="number"
-            placeholder="500"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
@@ -76,7 +100,6 @@ function AddExpenseModal({ onClose, onAddExpense }) {
 
           <textarea
             rows={3}
-            placeholder="Coffee + Lunch"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
@@ -94,7 +117,9 @@ function AddExpenseModal({ onClose, onAddExpense }) {
               type="submit"
               className="save-btn"
             >
-              Save Expense
+              {editingExpense
+                ? "Update Expense"
+                : "Save Expense"}
             </button>
           </div>
         </form>
