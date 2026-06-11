@@ -39,7 +39,13 @@ function Dashboard() {
   ]);
 
   const addExpense = (expense) => {
-    setExpenses([...expenses, expense]);
+    setExpenses((prev) => [...prev, expense]);
+  };
+
+  const deleteExpense = (index) => {
+    setExpenses((prev) =>
+      prev.filter((_, i) => i !== index)
+    );
   };
 
   return (
@@ -89,7 +95,10 @@ function Dashboard() {
           <BunnyAssistant />
         </div>
 
-        <ExpenseTable expenses={expenses} />
+        <ExpenseTable
+          expenses={expenses}
+          onDelete={deleteExpense}
+        />
 
         <AddExpenseButton
           onClick={() => setShowModal(true)}

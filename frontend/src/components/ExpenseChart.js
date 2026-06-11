@@ -10,7 +10,6 @@ import {
 import "../styles/ExpenseChart.css";
 
 function ExpenseChart() {
-
   const data = [
     { month: "Jan", expense: 4000 },
     { month: "Feb", expense: 2500 },
@@ -22,26 +21,49 @@ function ExpenseChart() {
 
   return (
     <div className="chart-card">
+      <div className="chart-header">
+        <h3>Monthly Expenses</h3>
 
-      <h3>Monthly Expenses</h3>
+        <div className="chart-tabs">
+          <button className="chart-tab">
+            Daily
+          </button>
 
-      <ResponsiveContainer
-        width="100%"
-        height={300}
-      >
-        <BarChart data={data}>
-          <XAxis dataKey="month" />
-          <YAxis />
-          <Tooltip />
+          <button className="chart-tab">
+            Weekly
+          </button>
 
-          <Bar
-            dataKey="expense"
-            radius={[8, 8, 0, 0]}
-          />
-        </BarChart>
+          <button className="chart-tab active">
+            Monthly
+          </button>
+        </div>
+      </div>
 
-      </ResponsiveContainer>
+      <div className="chart-body">
+        <ResponsiveContainer
+          width="100%"
+          height="100%"
+        >
+          <BarChart data={data}>
+            <XAxis
+              dataKey="month"
+              stroke="#94a3b8"
+            />
 
+            <YAxis
+              stroke="#94a3b8"
+            />
+
+            <Tooltip />
+
+            <Bar
+              dataKey="expense"
+              radius={[10, 10, 0, 0]}
+              fill="#7c3aed"
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
