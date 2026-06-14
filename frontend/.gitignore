@@ -28,3 +28,4 @@ yarn-error.log*
 
 # Backup files
 *.save
+frontend.zip

@@ -25,7 +25,7 @@ function Header() {
             <div className="profile-avatar">V</div>
             <div className="profile-info">
               <h4>Vidya</h4>
-              <p>Premium</p>
+              <p>Welcome back</p>
             </div>
           </div>
         </div>

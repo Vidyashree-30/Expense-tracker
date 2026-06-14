@@ -1,76 +1,20 @@
 .chart-card {
-  margin-top: 30px;
   padding: 24px;
-
-  background: linear-gradient(
-    180deg,
-    #111c32 0%,
-    #0f172a 100%
-  );
-
-  border: 1px solid #22314d;
+  background: linear-gradient(180deg, #111c32 0%, #0d1526 100%);
+  border: 1px solid rgba(124, 58, 237, 0.15);
   border-radius: 22px;
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.25);
-
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   transition: 0.3s ease;
 }
-
-.chart-card:hover {
-  box-shadow:
-    0 18px 45px rgba(124, 58, 237, 0.15);
-}
-
-.chart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  margin-bottom: 20px;
-}
-
+.chart-card:hover { box-shadow: 0 18px 45px rgba(124, 58, 237, 0.15); }
+.chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .chart-header h3 {
-  margin: 0;
-  color: white;
-  font-size: 20px;
-  font-weight: 600;
+  margin: 0; font-size: 18px; font-weight: 600;
+  background: linear-gradient(135deg, #ffffff, #c4b5fd);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-
-.chart-tabs {
-  display: flex;
-  gap: 10px;
-}
-
-.chart-tab {
-  border: none;
-  cursor: pointer;
-
-  padding: 8px 14px;
-
-  border-radius: 10px;
-
-  background: #1b2940;
-  color: #94a3b8;
-
-  transition: 0.25s;
-}
-
-.chart-tab:hover {
-  color: white;
-  background: #2d3f61;
-}
-
-.chart-tab.active {
-  background: linear-gradient(
-    135deg,
-    #7c3aed,
-    #ec4899
-  );
-
-  color: white;
-}
-
-.chart-body {
-  height: 330px;
-}
+.chart-tabs { display: flex; gap: 6px; background: rgba(255,255,255,0.04); padding: 4px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
+.chart-tab { border: none; cursor: pointer; padding: 7px 16px; border-radius: 9px; background: transparent; color: #64748b; font-size: 13px; font-weight: 500; transition: 0.25s; }
+.chart-tab:hover { color: #c4b5fd; }
+.chart-tab.active { background: linear-gradient(135deg, #7c3aed, #ec4899); color: white; box-shadow: 0 4px 12px rgba(124,58,237,0.4); }
+.chart-body { height: 300px; }
