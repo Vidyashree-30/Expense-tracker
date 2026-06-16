@@ -6,21 +6,18 @@ function Register() {
   return (
     <div className="register-container">
       <div className="register-card">
+<div className="logo-section">
 
-        <div className="logo-section">
-          <div className="logo-icon">
-            <FaWallet />
-          </div>
+  <div className="logo-icon">
+    <FaWallet />
+  </div>
 
-          <h1>
-            Expense <br />
-            Tracker
-          </h1>
+  <h1>Bunny Budget</h1>
 
-          <p className="app-tagline">
-            Smart • Secure • Personalized
-          </p>
-        </div>
+  <p className="app-tagline">
+    AI Finance Manager
+  </p>
+</div>
 
         <h2 className="register-title">
           Create Account
@@ -38,11 +35,6 @@ function Register() {
           placeholder="Email Address"
         />
 
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Password"
-        />
 
         <input
           type="password"

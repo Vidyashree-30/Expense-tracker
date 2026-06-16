@@ -1,15 +1,231 @@
+/* === Card container & layout fixes === */
+.bunny-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.bunny-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* === Illustration + speech bubble === */
+.bunny-illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+/* === Bunny Image Fix === */
+.bunny-illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.bunny-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+
+  display: block;
+
+  filter: drop-shadow(0 10px 25px rgba(124, 58, 237, 0.35));
+
+  transition: transform 0.3s ease;
+}
+
+.bunny-img:hover {
+  transform: scale(1.03);
+}
+
+/* === Bunny Text === */
+.bunny-message {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 12px 0 4px;
+}
+
+.bunny-sub {
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 16px;
+}
+
+/* === Ask Bunny Button === */
+.bunny-btn {
+  margin-top: 14px;
+  width: 100%;
+  height: 42px;
+
+  border: none;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #7c3aed,
+    #ec4899
+  );
+
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.bunny-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+}
+
+
+.bunny-speech-bubble {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 200px;
+  max-width: 70vw;
+  box-sizing: border-box;
+  background: rgba(124, 58, 237, 0.18);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #f1f5f9;
+  z-index: 2;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  animation: bubbleFadeIn 0.25s ease-out;
+  pointer-events: none;
+}
+
+.bunny-speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 18px;
+  width: 12px;
+  height: 12px;
+  background: rgba(124, 58, 237, 0.18);
+  border-right: 1px solid rgba(124, 58, 237, 0.35);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.35);
+  transform: rotate(45deg);
+}
+
+.bunny-speech-text {
+  word-break: break-word;
+}
+
+.bunny-cursor {
+  display: inline-block;
+  animation: cursorBlink 0.9s steps(1) infinite;
+  margin-left: 1px;
+  color: #a78bfa;
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+
+@keyframes bubbleFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Stats section: keep compact, no overflow === */
+.bunny-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.bunny-stat-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.bunny-stat-label {
+  font-size: 12px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.bunny-stat-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.bunny-stat-icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.bunny-stat-icon.purple { background: rgba(124, 58, 237, 0.15); }
+.bunny-stat-icon.blue { background: rgba(59, 130, 246, 0.15); }
+.bunny-stat-icon.green { background: rgba(34, 197, 94, 0.15); }
+
+.green-text { color: #4ade80; }
+
+/* === Chat view === */
 .bunny-chat {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  min-height: 0;
 }
 
 .chat-bunny-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.chat-bunny-mini-wrap {
+  position: relative;
+  display: flex;
+  z-index: 3;
 }
 
 .chat-bunny-mini {
@@ -17,6 +233,15 @@
   height: 60px;
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.4));
+}
+
+.chat-speech-bubble {
+  position: absolute;
+  top: -6px;
+  left: 64px;
+  width: 220px;
+  max-width: 70vw;
+  white-space: normal;
 }
 
 .chat-close {
@@ -28,15 +253,21 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 12px;
+  flex-shrink: 0;
 }
 
 .chat-messages {
   flex: 1;
-  overflow-y: auto;
+
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 280px;
+
+  overflow-y: auto;
+
+  min-height: 180px;
+  max-height: 420px;
+
   padding-right: 4px;
 }
 
@@ -55,6 +286,7 @@
   font-size: 13px;
   line-height: 1.5;
   max-width: 90%;
+  word-break: break-word;
 }
 
 .chat-bubble.assistant {
@@ -97,10 +329,12 @@
 .chat-input-row {
   display: flex;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .chat-input {
   flex: 1;
+  min-width: 0;
   background: rgba(255,255,255,0.06);
   border: 0.5px solid rgba(255,255,255,0.1);
   border-radius: 10px;
@@ -130,9 +364,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .chat-send:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* === Thinking animation (existing) === */
+.thinking-anim {
+  animation: thinkBob 1.2s ease-in-out infinite;
+}
+
+@keyframes thinkBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
 }

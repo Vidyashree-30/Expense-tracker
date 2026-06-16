@@ -23,6 +23,12 @@ function BunnyAssistant({ remainingBudget = 17550, monthlyBudget = 30000, todayS
   const [isChatLoading, setIsChatLoading] = useState(false);
   const chatEndRef = useRef(null);
 
+  // ---- Typewriter speech bubble state ----
+  const [speechText, setSpeechText] = useState("");
+  const typingTimerRef = useRef(null);
+  const tipRotationRef = useRef(null);
+  const tipIndexRef = useRef(0);
+
   const savingsRate = Math.round(((monthlyBudget - todaySpending) / monthlyBudget) * 100);
   const budgetUsedPercent = Math.round(((monthlyBudget - remainingBudget) / monthlyBudget) * 100);
   const budgetLeftPercent = Math.round((remainingBudget / monthlyBudget) * 100);
@@ -42,6 +48,75 @@ function BunnyAssistant({ remainingBudget = 17550, monthlyBudget = 30000, todayS
     advice: { image: bunnyAdvice, message: "⚠️ You've used 80% of your budget!", sub: "Try reducing unnecessary expenses." },
     celebrate: { image: bunnyCelebrate, message: "Amazing! 🎉", sub: "You're saving really well!" },
   };
+
+  // Pool of rotating idle tips - personalized using live data
+  const getIdleTips = () => {
+    const topCategory = Object.entries(categoryBreakdown).sort((a, b) => b[1] - a[1])[0];
+    const tips = [
+      `🐰 You've spent ₹${totalExpenses.toLocaleString()} so far this month!`,
+      `💡 Tip: Try to keep daily spending under ₹${Math.round(monthlyBudget / 30).toLocaleString()}.`,
+      `🎯 Your savings rate is ${savingsRate}% — ${savingsRate > 50 ? "nice work!" : "let's push it higher!"}`,
+      `👛 You've used ${budgetUsedPercent}% of your monthly budget.`,
+    ];
+    if (topCategory) {
+      tips.push(`📊 Your top spending category is "${topCategory[0]}" at ₹${topCategory[1].toLocaleString()}.`);
+    }
+    if (budgetLeftPercent > 50) {
+      tips.push("✨ You're on track! Keep it up and you'll hit your savings goal.");
+    }
+    if (budgetUsedPercent >= 80) {
+      tips.push("⚠️ Heads up — you're close to your budget limit this month!");
+    }
+    tips.push("💬 Tap 'Ask Bunny' if you want personalized advice!");
+    return tips;
+  };
+
+  // Typewriter effect: types out a string, then waits, then triggers callback
+  const typeText = (text, onDone) => {
+    clearInterval(typingTimerRef.current);
+    setSpeechText("");
+    let i = 0;
+    typingTimerRef.current = setInterval(() => {
+      i++;
+      setSpeechText(text.slice(0, i));
+      if (i >= text.length) {
+        clearInterval(typingTimerRef.current);
+        if (onDone) onDone();
+      }
+    }, 35);
+  };
+
+  // Rotate idle tips with typewriter effect (only when chat is closed)
+  useEffect(() => {
+    if (showChat) {
+      clearInterval(typingTimerRef.current);
+      clearTimeout(tipRotationRef.current);
+      return;
+    }
+
+    const tips = getIdleTips();
+
+    const showNextTip = () => {
+      const tip = tips[tipIndexRef.current % tips.length];
+      tipIndexRef.current += 1;
+      typeText(tip, () => {
+        // hold the finished message on screen, then clear and move to next
+        tipRotationRef.current = setTimeout(() => {
+          setSpeechText("");
+          tipRotationRef.current = setTimeout(showNextTip, 400);
+        }, 3200);
+      });
+    };
+
+    // small delay before first tip
+    tipRotationRef.current = setTimeout(showNextTip, 600);
+
+    return () => {
+      clearInterval(typingTimerRef.current);
+      clearTimeout(tipRotationRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showChat, remainingBudget, todaySpending, monthlyBudget, expenses.length]);
 
   useEffect(() => {
     if (!hasLoaded) { setHasLoaded(true); return; }
@@ -101,6 +176,7 @@ function BunnyAssistant({ remainingBudget = 17550, monthlyBudget = 30000, todayS
     setMessages(updatedMessages);
     setInput("");
     setIsChatLoading(true);
+    setIsThinking(true);
     setBunnyState("thinking");
 
     const systemPrompt = `You are Bunny, a cute and friendly AI finance assistant for the BunnyBudget app. 
@@ -119,7 +195,9 @@ Here is the user's current financial data:
 Always reference their actual numbers when giving advice. Be specific and helpful.`;
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      // NOTE: Calling api.anthropic.com directly from the browser will always
+      // fail (CORS + missing auth). Route through your backend instead.
+      const response = await fetch("/api/bunny-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -133,20 +211,39 @@ Always reference their actual numbers when giving advice. Be specific and helpfu
         }),
       });
 
+      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+
       const data = await response.json();
       const reply = data.content?.[0]?.text || "🐰 Oops! I had trouble thinking. Try again!";
 
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
 
-      if (savingsRate > 75) setBunnyState("celebrate");
-      else if (budgetUsedPercent >= 80) setBunnyState("advice");
-      else setBunnyState("counting");
+      let nextState = "counting";
+      if (savingsRate > 75) nextState = "celebrate";
+      else if (budgetUsedPercent >= 80) nextState = "advice";
+      setBunnyState(nextState);
+
+      // Bunny "speaks" the reply via the typewriter bubble too
+      setIsThinking(false);
+      if (!showChat) {
+  typeText(
+    reply.length > 140
+      ? reply.slice(0, 140) + "…"
+      : reply
+  );
+}
     } catch (err) {
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "🐰 Sorry, I couldn't connect right now. Try again!" },
       ]);
       setBunnyState("waving");
+      setIsThinking(false);
+      if (!showChat) {
+  typeText(
+    "🐰 Sorry, I couldn't connect right now. Try again!"
+  );
+}
     } finally {
       setIsChatLoading(false);
     }
@@ -170,6 +267,14 @@ Always reference their actual numbers when giving advice. Be specific and helpfu
         <>
           <div className={`bunny-illustration ${isThinking ? "thinking-anim" : ""}`}>
             <img src={current.image} alt={bunnyState} className="bunny-img" />
+            {speechText && (
+              <div className="bunny-speech-bubble">
+                <span className="bunny-speech-text">
+                  {speechText}
+                  <span className="bunny-cursor">|</span>
+                </span>
+              </div>
+            )}
           </div>
           <p className="bunny-message">{current.message}</p>
           <p className="bunny-sub">{current.sub}</p>
@@ -199,7 +304,13 @@ Always reference their actual numbers when giving advice. Be specific and helpfu
       ) : (
         <div className="bunny-chat" onClick={(e) => e.stopPropagation()}>
           <div className="chat-bunny-top">
-            <img src={current.image} alt="bunny" className="chat-bunny-mini" />
+            <div className="chat-bunny-mini-wrap">
+  <img
+    src={current.image}
+    alt="bunny"
+    className="chat-bunny-mini"
+  />
+</div>
             <button className="chat-close" onClick={() => setShowChat(false)}>✕</button>
           </div>
 
